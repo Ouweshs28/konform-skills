@@ -1,0 +1,10 @@
+# security.txt template (RFC 9116)
+# Save as /.well-known/security.txt (for example public/.well-known/security.txt or static/.well-known/security.txt).
+# Remove these comment lines starting with "# security.txt template" if you prefer; comments are allowed by the RFC.
+# "Contact" and "Expires" are required. Set Expires less than a year ahead and renew it.
+
+Contact: mailto:[[security@example.mu]]
+Expires: [[YYYY-MM-DD]]T00:00:00.000Z
+Preferred-Languages: en, fr
+Canonical: https://[[www.example.mu]]/.well-known/security.txt
+Policy: https://[[www.example.mu]]/security-policy

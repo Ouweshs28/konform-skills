@@ -1,0 +1,44 @@
+name: Validate skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10
+
+      - name: Validate every SKILL.md against the Agent Skills spec
+        run: |
+          for dir in skills/*/; do
+            echo "Validating $dir"
+            uvx --from skills-ref agentskills validate "$dir"
+          done
+
+      - name: Keep descriptions within the claude.ai limit (200 characters)
+        run: |
+          status=0
+          for file in skills/*/SKILL.md; do
+            desc=$(awk '/^description:/{sub(/^description:[ ]*/, ""); print; exit}' "$file")
+            desc="${desc%\"}"; desc="${desc#\"}"
+            echo "$file: ${#desc} characters"
+            if [ "${#desc}" -gt 200 ]; then
+              echo "::error file=$file::description is ${#desc} characters; keep it at 200 or fewer"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Check relative links in Markdown
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --include-fragments './**/*.md'
+          fail: true

@@ -1,0 +1,9 @@
+# IDE and OS files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Reports generated when testing the skill on other projects
+compliance-report*.md

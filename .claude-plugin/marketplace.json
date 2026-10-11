@@ -1,0 +1,23 @@
+{
+  "name": "konform-skills",
+  "owner": {
+    "name": "Ouwesh Seeroo",
+    "url": "https://github.com/Ouweshs28"
+  },
+  "metadata": {
+    "description": "Agent skills for website and web-app legal compliance in Mauritius, with international coverage.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "konform",
+      "description": "Audit a website or web-app repository for Mauritian law (Data Protection Act 2017 and more) and international rules, then fix the gaps.",
+      "version": "1.0.0",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/konform-skills"
+      ]
+    }
+  ]
+}
